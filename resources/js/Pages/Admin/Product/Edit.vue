@@ -33,7 +33,6 @@ const submit = () => {
     })
 }
 
-console.log(form)
 </script>
 
 <template>

@@ -11,6 +11,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
+    categories: Array
 });
 
 const showingNavigationDropdown = ref(false);
@@ -47,8 +48,29 @@ const logout = () => {
                             </a>
                             <!-- Nav Links -->
                             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+
+                                <Dropdown>
+                                    <template #trigger>
+                                        <li><a class="hover:text-gray-200" href="#">Category</a></li>
+                                    </template>
+
+                                    <template #content>
+                                        <div class="text-left text-sm my-1 w-4/5 mx-auto text-gray-200 font-bold"
+                                            id="submenu" v-for="category in categories" :key="category.id">
+                                            <Link :href="route('home')">
+                                            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md">
+                                                {{ category.name }}
+                                            </h1>
+                                            </Link>
+                                        </div>
+                                    </template>
+
+                                </Dropdown>
+
+
+
+
                                 <li><a class="hover:text-gray-200" href="#">Home</a></li>
-                                <li><a class="hover:text-gray-200" href="#">Category</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Collections</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                             </ul>
@@ -75,20 +97,21 @@ const logout = () => {
                                     </span>
                                 </a>
                                 <!-- Sign In / Register -->
-                                <Link v-if="$page.props.user" :href="route('dashboard')" class="flex items-center hover:text-gray-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                                <Link v-if="$page.props.user" :href="route('dashboard')"
+                                    class="flex items-center hover:text-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                                 </Link>
 
                                 <template v-else>
-                                    <Link :href="route('login')"
-                                        class="flex items-center hover:text-gray-200">Log in</Link>
+                                    <Link :href="route('login')" class="flex items-center hover:text-gray-200">Log in
+                                    </Link>
 
-                                    <Link :href="route('register')"
-                                        class="ml-4 flex items-center hover:text-gray-200">Register</Link>
+                                    <Link :href="route('register')" class="ml-4 flex items-center hover:text-gray-200">
+                                    Register</Link>
                                 </template>
                             </div>
                         </div>
@@ -139,19 +162,19 @@ const logout = () => {
                             <span class="self-center text-2xl font-semibold whitespace-nowrap ">Flowbite</span>
                         </a>
                     </div>
+
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                        <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">Resources
-                            </h2>
-                            <ul class="text-gray-600">
-                                <li class="mb-4">
-                                    <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
-                                </li>
-                                <li>
-                                    <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <template v-if="$page.props.auth.user">
+                            <div>
+                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">For Employees
+                                </h2>
+                                <ul class="text-gray-600">
+                                    <li class="mb-4" v-if="$page.props.auth.user.admin">
+                                        <a :href="route('admin')" class="hover:underline">Admin</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">Follow us
                             </h2>

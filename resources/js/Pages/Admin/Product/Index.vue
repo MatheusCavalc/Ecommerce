@@ -61,7 +61,8 @@ modal()
                                 </TData>
 
                                 <TData type="first">
-                                    {{ product.published }}
+                                    <p v-if="product.published == 1">Published</p>
+                                    <p v-else>Not Published</p>
                                 </TData>
 
                                 <TData type="normal">

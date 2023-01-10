@@ -16,7 +16,11 @@ const props = defineProps({
 
 const proxyChecked = computed({
     get() {
-        return props.checked;
+        if (props.checked == 1) {
+            return true
+        } else {
+            return false
+        }
     },
 
     set(val) {
