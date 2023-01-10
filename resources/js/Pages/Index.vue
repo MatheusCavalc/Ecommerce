@@ -12,7 +12,7 @@ import CarouselHome from '../Components/CarouselHome.vue';
                     <CarouselHome></CarouselHome>
 
 
-                    <p>REMAKE MIGRATIONS BECAUSE CATEGORIES // MAKE ADMIN PAGES FIRST</p>
+                    <p>CHECKBOX ERROR AND FRONT END CLIENT SIDE </p>
 
 
                 </div>

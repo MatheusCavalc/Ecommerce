@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,11 +29,18 @@ Route::middleware([
     })->name('dashboard');
 });
 
+//     APP - ADMIN SIDE     //
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
+});
 
 
 
 
 
 //     APP - CLIENT SIDE    //
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
