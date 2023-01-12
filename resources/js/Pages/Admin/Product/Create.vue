@@ -15,8 +15,11 @@ const form = useForm({
     image: '',
     description: '',
     price: '',
+    on_sale: false,
+    sale_price: '',
     published: false,
-    created_by: props.user_id
+    created_by: props.user_id,
+    updated_by: props.user_id
 })
 
 const submit = () => {
@@ -83,6 +86,24 @@ const submit = () => {
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     v-model="form.price" required />
                                 <InputError class="mt-2" :message="form.errors.price" />
+                            </div>
+
+                            <div class="flex flex-wrap">
+                                <div class="my-4 w-full md:w-1/5">
+                                    <label class="flex items-center">
+                                        <Checkbox v-model:checked="form.on_sale" name="on_sale" />
+                                        <span class="ml-2 text-sm text-gray-600">On Sale</span>
+                                    </label>
+                                </div>
+
+                                <div class="mb-3 w-full md:w-4/5">
+                                    <InputLabel for="sale_price" value="Sale Price"
+                                        class="block mb-2 text-sm font-medium text-gray-900" />
+                                    <TextInput id="sale_price" type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        v-model="form.sale_price" />
+                                    <InputError class="mt-2" :message="form.errors.sale_price" />
+                                </div>
                             </div>
 
                             <div class="block my-4">

@@ -51,8 +51,11 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,webp|max:1024',
             'description' => 'required|max:1000',
             'price' => 'required|decimal:2',
+            'on_sale' => 'required',
+            'sale_price' => 'nullable|decimal:2',
             'published' => 'required',
             'created_by' => 'required',
+            'updated_by' => 'required'
         ]);
 
         if ($data['image']) {
@@ -111,6 +114,8 @@ class ProductController extends Controller
             'image' => $rule,
             'description' => 'required|max:1000',
             'price' => 'required|decimal:2',
+            'on_sale' => 'required',
+            'sale_price' => 'nullable|decimal:2',
             'published' => 'required',
             'updated_by' => 'required',
         ]);

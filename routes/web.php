@@ -30,8 +30,7 @@ Route::middleware([
 });
 
 //     APP - ADMIN SIDE     //
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('auth');
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class);
@@ -44,3 +43,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
 //     APP - CLIENT SIDE    //
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/product/{product:slug}', [HomeController::class, 'view_product'])->name('product.view');
+Route::get('/c/{category:slug}', [HomeController::class, 'view_category'])->name('category_view');
