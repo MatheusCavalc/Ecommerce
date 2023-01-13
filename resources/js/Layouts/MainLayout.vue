@@ -42,10 +42,10 @@ const logout = () => {
                     <!-- navbar -->
                     <nav class="flex justify-between bg-slate-400 text-black w-screen">
                         <div class="px-5 xl:px-12 py-6 flex w-full items-center">
-                            <a class="text-3xl font-bold font-heading" href="#">
+                            <Link class="text-3xl font-bold font-heading" :href="route('home')">
                                 <!-- <img class="h-9" src="logo.png" alt="logo"> -->
                                 Logo Here.
-                            </a>
+                            </Link>
                             <!-- Nav Links -->
                             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
 
@@ -70,7 +70,7 @@ const logout = () => {
 
 
 
-                                <li><a class="hover:text-gray-200" href="#">Home</a></li>
+                                <li><Link class="hover:text-gray-200" :href="route('home')">Home</Link></li>
                                 <li><a class="hover:text-gray-200" href="#">Collections</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                             </ul>
@@ -83,7 +83,7 @@ const logout = () => {
                                             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg>
                                 </a>
-                                <a class="flex items-center hover:text-gray-200" href="#">
+                                <Link class="flex items-center hover:text-gray-200" :href="route('cart.index')">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,7 @@ const logout = () => {
                                         <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
                                         </span>
                                     </span>
-                                </a>
+                                </Link>
                                 <!-- Sign In / Register -->
                                 <Link v-if="$page.props.user" :href="route('dashboard')"
                                     class="flex items-center hover:text-gray-200">

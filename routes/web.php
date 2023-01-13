@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\CheckoutController;
 use App\Http\Controllers\Client\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +45,17 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
 //     APP - CLIENT SIDE    //
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product/{product:slug}', [HomeController::class, 'view_product'])->name('product.view');
-Route::get('/c/{category:slug}', [HomeController::class, 'view_category'])->name('category_view');
+Route::get('/product/{product:slug}', [HomeController::class, 'viewProduct'])->name('product.view');
+Route::get('/c/{category:slug}', [HomeController::class, 'viewCategory'])->name('category_view');
+
+Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function(){
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::get('/add/{product:slug}/{qty}', [CartController::class, 'add'])->name('add');
+    Route::get('/remove/{product_id}', [CartController::class, 'remove'])->name('remove');
+    Route::get('/update-quantity/{product:slug}', [CartController::class, 'updateQuantity'])->name('update-quantity');
+});
+
+Route::prefix('/checkout')->name('checkout.')->middleware('auth')->group(function(){
+    Route::get('/', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/', [CheckoutController::class, 'payment'])->name('payment');
+});

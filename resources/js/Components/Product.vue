@@ -1,9 +1,34 @@
 <script setup>
+import { Link } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+
 const props = defineProps(['product'])
+
+let qty = ref('')
+
+qty.value = 1
+
+const decreaseQty = () => {
+    if (qty.value == 1) {
+        qty.value
+    } else {
+        qty.value--
+    }
+}
+
+const increaseQty = () => {
+    if (qty.value == 5) {
+        qty.value
+    } else {
+        qty.value++
+    }
+    console.log(qty)
+}
+
+console.log(qty)
 
 const per = Math.round(100 - (props.product.sale_price * 100 / props.product.price))
 
-console.log(per)
 </script>
 
 <template>
@@ -84,7 +109,7 @@ console.log(per)
             <div class="flex flex-col gap-5 mb-16 sm:flex-row lg:mb-0">
                 <div
                     class="w-full h-10 text-sm bg-light py-2 flex items-center justify-between rounded-lg font-bold relatives sm:w-80">
-                    <div id="minus" class="plus-minus">
+                    <button @click="decreaseQty" id="minus" class="plus-minus">
                         <div class="w-3 h-1 bg-orange-500 absolute" id="minus"></div>
                         <svg width="12" height="4" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -95,11 +120,11 @@ console.log(per)
                             </defs>
                             <use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#a" />
                         </svg>
-                    </div>
+                    </button>
 
-                    <span id="amount" class="select-none">0</span>
+                    <span id="amount" class="select-none">{{ qty }}</span>
 
-                    <div id="plus" class="plus-minus">
+                    <button @click="increaseQty" id="plus" class="plus-minus">
                         <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" id="plus">
                             <defs>
@@ -109,18 +134,18 @@ console.log(per)
                             </defs>
                             <use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#b" id="plus" />
                         </svg>
-                    </div>
+                    </button>
                 </div>
-                <button
+                <Link :href="route('cart.add', [product.slug, qty])"
                     class="w-full h-10 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
                     id="add-cart">
-                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20">
-                        <path
-                            d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
-                            fill="hsl(223, 64%, 98%)" fill-rule="nonzero" />
-                    </svg>
-                    Add to cart
-                </button>
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20">
+                    <path
+                        d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                        fill="hsl(223, 64%, 98%)" fill-rule="nonzero" />
+                </svg>
+                Add to cart
+                </Link>
             </div>
         </section>
     </main>

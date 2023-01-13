@@ -23,7 +23,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function view_product(Product $product)
+    public function viewProduct(Product $product)
     {
         return Inertia::render('Client/ProductView', [
             'product' => $product,
@@ -35,7 +35,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function view_category(Category $category)
+    public function viewCategory(Category $category)
     {
         return Inertia::render('Client/CategoryView', [
             'categories' => Category::all(),
