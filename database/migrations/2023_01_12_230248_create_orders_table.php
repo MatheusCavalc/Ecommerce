@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,9 +16,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_price', 20, 2);
-            $table->string('products');
 
+            //PURCHASE INFOS
+            $table->decimal('total_price', 20, 2);
+            $table->longText('products');
+
+            //SHIPPING INFOS
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone')->nullable();
@@ -27,8 +31,18 @@ return new class extends Migration
             $table->string('state', 45)->nullable();
             $table->string('zipcode', 45);
 
-            $table->string('status_payment', 45)->nullable();
-            $table->foreignIdFor(User::class, 'created_by')->nullable();
+            //STATUS PAYMENT
+            $table->enum('status_payment', ['PENDING', 'PAID', 'FAILED'])->default('PENDING');
+
+            //PAYMENT ID (ON STRIPE)
+            $table->longText('stripe_payment_id')->nullable();
+
+            //OWNER ORDER
+            $table->foreignIdFor(User::class, 'created_by');
+
+            //STATUS SHIPPING
+            $table->enum('status_shipping', ['PENDING', 'ON_SHIPPING'])->nullable();
+
             $table->timestamps();
         });
     }

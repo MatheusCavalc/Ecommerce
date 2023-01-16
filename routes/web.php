@@ -57,5 +57,7 @@ Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function(){
 
 Route::prefix('/checkout')->name('checkout.')->middleware('auth')->group(function(){
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
-    Route::post('/', [CheckoutController::class, 'payment'])->name('payment');
+    Route::post('/', [CheckoutController::class, 'placeOrder'])->name('place.order');
+    Route::get('/success', [CheckoutController::class, 'success'])->name('success');
+    Route::get('/failure', [CheckoutController::class, 'failure'])->name('failure');
 });

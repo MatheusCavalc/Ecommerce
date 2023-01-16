@@ -59,7 +59,7 @@ defineProps(['cartBox', 'categories', 'total_value', 'total_items'])
                     <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                     <div class="flex justify-between mt-10 mb-5">
                         <span class="font-semibold text-sm uppercase">{{ total_items }} Items</span>
-                        <span class="font-semibold text-sm">{{ total_value }}</span>
+                        <span class="font-semibold text-sm">${{ total_value }}</span>
                     </div>
                     <div class="py-10">
                         <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>

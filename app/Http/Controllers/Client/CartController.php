@@ -15,8 +15,8 @@ class CartController extends Controller
     {
         $cartBox = session()->get('cart');
         $categories = Category::all();
-        $total_value = array_sum(array_map(fn ($item) => $item['total_price'], $cartBox));
-        $total_items = array_sum(array_map(fn ($item) => $item['qty'], $cartBox));
+        $total_value = $cartBox == null ? 0 : array_sum(array_map(fn ($item) => $item['total_price'], $cartBox));
+        $total_items = $cartBox == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cartBox));
 
         return Inertia::render('Client/Cart', compact('cartBox', 'categories', 'total_value', 'total_items'));
     }
