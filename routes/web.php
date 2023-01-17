@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CheckoutController;
@@ -37,6 +38,13 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middlewa
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/paid', [OrderController::class, 'paidOrders'])->name('orders.paid-orders');
+    Route::get('/orders/pending', [OrderController::class, 'pendingOrders'])->name('orders.pending-orders');
+
+    Route::get('/orders/{id}/details', [OrderController::class, 'orderDetails'])->name('orders.details');
+    Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
 });
 
 

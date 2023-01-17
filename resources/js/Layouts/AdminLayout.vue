@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3';
                             <div class="text-gray-100 text-xl">
                                 <div class="p-2.5 mt-1 flex items-center">
                                     <Link :href="route('admin')">
-                                        <h1 class="font-bold text-gray-200 text-[15px] ml-3">E-commerce Admin</h1>
+                                    <h1 class="font-bold text-gray-200 text-[15px] ml-3">E-commerce Admin</h1>
                                     </Link>
                                 </div>
                             </div>
@@ -26,29 +26,28 @@ import { Link } from '@inertiajs/inertia-vue3';
 
                             <Link :href="route('admin.categories.index')"
                                 class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-                                <div class="flex justify-between w-full items-center">
-                                    <span class="text-[15px] ml-4 text-gray-200 font-bold">Category</span>
-                                    <span class="text-sm rotate-180" id="arrow">
-                                    </span>
-                                </div>
+                            <div class="flex justify-between w-full items-center">
+                                <span class="text-[15px] ml-4 text-gray-200 font-bold">Category</span>
+                                <span class="text-sm rotate-180" id="arrow">
+                                </span>
+                            </div>
                             </Link>
 
                             <Link :href="route('admin.products.index')"
                                 class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-                                <div class="flex justify-between w-full items-center">
-                                    <span class="text-[15px] ml-4 text-gray-200 font-bold">Product</span>
-                                    <span class="text-sm rotate-180" id="arrow">
-                                    </span>
-                                </div>
+                            <div class="flex justify-between w-full items-center">
+                                <span class="text-[15px] ml-4 text-gray-200 font-bold">Product</span>
+                                <span class="text-sm rotate-180" id="arrow">
+                                </span>
+                            </div>
                             </Link>
 
-                            <!--
                             <Dropdown>
                                 <template #trigger>
                                     <div
                                         class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
                                         <div class="flex justify-between w-full items-center">
-                                            <span class="text-[15px] ml-4 text-gray-200 font-bold">Product</span>
+                                            <span class="text-[15px] ml-4 text-gray-200 font-bold">Order</span>
                                             <span class="text-sm rotate-180" id="arrow">
                                             </span>
                                         </div>
@@ -58,23 +57,24 @@ import { Link } from '@inertiajs/inertia-vue3';
                                 <template #content>
                                     <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
                                         id="submenu">
-                                        <Link :href="route('home')">
+                                        <Link :href="route('admin.orders.index')">
                                         <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                            Teams
+                                            All Orders
                                         </h1>
                                         </Link>
-                                        <Link :href="route('home')">
+                                        <Link :href="route('admin.orders.paid-orders')">
                                         <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                            Players
+                                            Paid Orders
                                         </h1>
                                         </Link>
+                                        <Link :href="route('admin.orders.pending-orders')">
                                         <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                            Tournaments
+                                            Pending Payment Orders
                                         </h1>
+                                        </Link>
                                     </div>
                                 </template>
                             </Dropdown>
-                            -->
 
                             <div
                                 class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">

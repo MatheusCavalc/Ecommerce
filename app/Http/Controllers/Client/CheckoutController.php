@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendOrderDataEmailJob;
+use App\Jobs\StoreOrderDataJob;
 use App\Models\Category;
 use App\Models\Order;
+use App\Enums\PaymentStatus;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Stripe\Checkout\Session;
@@ -70,20 +73,20 @@ class CheckoutController extends Controller
 
     public function success(Request $request)
     {
+        Stripe::setApiKey(getenv('STRIPE_SECRET'));
+
         $categories = Category::all();
 
-        session()->flush();
-
-        Stripe::setApiKey(getenv('STRIPE_SECRET'));
+        session()->forget('cart');
 
         $session = Session::retrieve($request->get('session_id'));
 
-        Order::findOrFail($request->get('order_id'))->update([  //queue?
-            'status_payment' => 'PAID',
-            'stripe_payment_id' => $session->payment_intent
-        ]);
+        $order = Order::findOrFail($request->get('order_id'));
 
-        //send email //queue
+        //Queue + Job
+        StoreOrderDataJob::withChain([
+            new SendOrderDataEmailJob($session->customer_details->email, $order)
+        ])->dispatch($request->get('order_id'), PaymentStatus::Paid, $session->payment_intent, $session->customer_details->email);
 
         return Inertia::render('Client/Checkout/Success', compact('categories', 'session'));
     }
@@ -92,13 +95,24 @@ class CheckoutController extends Controller
     {
         $categories = Category::all();
 
-        Order::findOrFail($request->get('order_id'))->update([ //queue?
-            'status_payment' => 'FAILED',
-        ]);
+        new StoreOrderDataJob($request->get('order_id'), PaymentStatus::Failed);
 
         //send email //queue
 
         return Inertia::render('Client/Checkout/Failure', compact('categories'));
-
     }
+
+
+
+
+
+
+
+    //MELHORAR VIEWS DE SUCCESSO E FALHA APOS CHECKOUT //mais ou menos
+    //QUEUE + JOBS NO SUCESSO E FALHA PARA ENVIO DE EMAIL PARA CLIENTES
+
+    //CRIAR ADMIN ORDERS (COMPLETO) REFINAR
+    //INFOS NA INDEX DE ADMIN (VENDAS, PRODUTOS, CATEGORIAS E ETC IGUAL O PROJETO INVENTARIO)
+
+    //COMPONENTIZAR O MAXIMO POSSIVEL!!!
 }

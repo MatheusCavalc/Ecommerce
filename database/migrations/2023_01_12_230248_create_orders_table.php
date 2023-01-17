@@ -40,6 +40,9 @@ return new class extends Migration
             //OWNER ORDER
             $table->foreignIdFor(User::class, 'created_by');
 
+            //OWNER EMAIL
+            $table->string('email')->nullable();
+
             //STATUS SHIPPING
             $table->enum('status_shipping', ['PENDING', 'ON_SHIPPING'])->nullable();
 

@@ -26,36 +26,38 @@ const submit = () => {
 
 <template>
     <MainLayout :categories="categories">
-
         <div class="py-12">
-            <div class="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
-                <a href="#" class="text-2xl font-bold text-gray-800">Checkout</a>
-            </div>
-            <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
-                <div class="px-4 pt-8">
-                    <p class="text-xl font-medium">Order Summary</p>
-                    <p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
-                    <div v-for="product in cartBox" :key="product.id"
-                        class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
-                        <div class="flex flex-col rounded-lg bg-white sm:flex-row">
-                            <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                                :src="`/storage/${product.image}`" :alt="product.name" />
-                            <div class="flex w-full flex-col px-4 py-4">
-                                <span class="font-semibold">{{ product.name }}</span>
-                                <span class="float-right text-gray-400">Quantity: {{ product.qty }}</span>
-                                <p class="text-lg font-bold">${{ product.total_price }}</p>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+                <div class="bg-white overflow-hidden sm:rounded-lg mt-6">
+                    <p class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl ml-4 mt-6">
+                        Checkout
+                    </p>
+
+                    <div class="grid sm:px-10 lg:grid-cols-2">
+                        <div class="px-4 pt-8">
+                            <p class="text-xl font-medium">Order Summary</p>
+                            <p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
+                            <div v-for="product in cartBox" :key="product.id"
+                                class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
+                                <div class="flex flex-col rounded-lg bg-white sm:flex-row">
+                                    <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                                        :src="`/storage/${product.image}`" :alt="product.name" />
+                                    <div class="flex w-full flex-col px-4 py-4">
+                                        <span class="font-semibold">{{ product.name }}</span>
+                                        <span class="float-right text-gray-400">Quantity: {{ product.qty }}</span>
+                                        <p class="text-lg font-bold">${{ product.total_price }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-                    <p class="text-xl font-medium">Payment Details</p>
-                    <p class="text-gray-400">Complete your order by providing your payment details.</p>
+                        <div class="mt-10 px-4 pt-8 lg:mt-0">
+                            <p class="text-xl font-medium">Payment Details</p>
+                            <p class="text-gray-400">Complete your order by providing your payment details.</p>
 
-                    <form @submit.prevent="submit">
-                        <div class="">
-                            <!--
+                            <form @submit.prevent="submit">
+                                <div class="">
+                                    <!--
                              <label for="email" class="mt-4 mb-2 block text-sm font-medium">Email</label>
                             <div class="relative">
                                 <input type="text" id="email" name="email"
@@ -110,112 +112,115 @@ const submit = () => {
                             </div> ANTIGAS INFORMACOES DE CARTAO PARA PAYMENT
                         -->
 
-                            <div class="mt-1">
-                                <div class="flex flex-col sm:flex-row">
-                                    <div class="flex-auto">
-                                        <label for="first_name" class="mt-4 mb-2 block text-sm font-medium">
-                                            First Name
-                                        </label>
-                                        <input type="text" id="first_name" v-model="form.first_name"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="First Name" />
-                                        <InputError class="mt-2" :message="form.errors.first_name" />
-                                    </div>
-                                    <div class="flex-auto">
-                                        <label for="last_name" class="mt-4 mb-2 block text-sm font-medium">
-                                            Last Name
-                                        </label>
-                                        <input type="text" id="last_name" v-model="form.last_name"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="Last Name" />
-                                        <InputError class="mt-2" :message="form.errors.last_name" />
-                                    </div>
-                                </div>
-                                <div class="flex flex-col sm:flex-row">
-                                    <div class="flex-auto">
-                                        <label for="phone" class="mt-4 mb-2 block text-sm font-medium">
-                                            Phone
-                                        </label>
-                                        <input type="text" id="phone" v-model="form.phone"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="Phone" />
-                                            <InputError class="mt-2" :message="form.errors.phone" />
-                                    </div>
-                                </div>
-                                <div class="flex flex-col sm:flex-row">
-                                    <div class="flex-auto">
-                                        <label for="address1" class="mt-4 mb-2 block text-sm font-medium">
-                                            Address 1
-                                        </label>
-                                        <input type="text" id="address1" v-model="form.address1"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="Address 1" />
-                                            <InputError class="mt-2" :message="form.errors.address1" />
-                                    </div>
-                                </div>
-                                <div class="flex flex-col sm:flex-row">
-                                    <div class="flex-auto">
-                                        <label for="address2" class="mt-4 mb-2 block text-sm font-medium">
-                                            Address 2
-                                        </label>
-                                        <input type="text" id="address2" v-model="form.address2"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="Address 2" />
-                                            <InputError class="mt-2" :message="form.errors.address2" />
-                                    </div>
-                                </div>
-                                <div class="flex flex-col sm:flex-row">
-                                    <div class="flex-auto">
-                                        <label for="city" class="mt-4 mb-2 block text-sm font-medium">
-                                            City
-                                        </label>
-                                        <input type="text" id="city" v-model="form.city"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="City" />
-                                            <InputError class="mt-2" :message="form.errors.city" />
-                                    </div>
-                                    <div class="flex-auto">
-                                        <label for="state" class="mt-4 mb-2 block text-sm font-medium">
-                                            State
-                                        </label>
-                                        <input type="text" id="state" v-model="form.state"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="State" />
-                                            <InputError class="mt-2" :message="form.errors.state" />
-                                    </div>
-                                    <div class="flex-auto">
-                                        <label for="zipcode" class="mt-4 mb-2 block text-sm font-medium">
-                                            Zipcode
-                                        </label>
-                                        <input type="text" id="zipcode" v-model="form.zipcode"
-                                            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                            placeholder="Zipcode" />
-                                            <InputError class="mt-2" :message="form.errors.zipcode" />
-                                    </div>
-                                </div>
+                                    <div class="mt-1">
+                                        <div class="flex flex-col sm:flex-row">
+                                            <div class="flex-auto">
+                                                <label for="first_name" class="mt-4 mb-2 block text-sm font-medium">
+                                                    First Name
+                                                </label>
+                                                <input type="text" id="first_name" v-model="form.first_name"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="First Name" />
+                                                <InputError class="mt-2" :message="form.errors.first_name" />
+                                            </div>
+                                            <div class="flex-auto">
+                                                <label for="last_name" class="mt-4 mb-2 block text-sm font-medium">
+                                                    Last Name
+                                                </label>
+                                                <input type="text" id="last_name" v-model="form.last_name"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="Last Name" />
+                                                <InputError class="mt-2" :message="form.errors.last_name" />
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row">
+                                            <div class="flex-auto">
+                                                <label for="phone" class="mt-4 mb-2 block text-sm font-medium">
+                                                    Phone
+                                                </label>
+                                                <input type="text" id="phone" v-model="form.phone"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="Phone" />
+                                                <InputError class="mt-2" :message="form.errors.phone" />
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row">
+                                            <div class="flex-auto">
+                                                <label for="address1" class="mt-4 mb-2 block text-sm font-medium">
+                                                    Address 1
+                                                </label>
+                                                <input type="text" id="address1" v-model="form.address1"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="Address 1" />
+                                                <InputError class="mt-2" :message="form.errors.address1" />
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row">
+                                            <div class="flex-auto">
+                                                <label for="address2" class="mt-4 mb-2 block text-sm font-medium">
+                                                    Address 2
+                                                </label>
+                                                <input type="text" id="address2" v-model="form.address2"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="Address 2" />
+                                                <InputError class="mt-2" :message="form.errors.address2" />
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row">
+                                            <div class="flex-auto">
+                                                <label for="city" class="mt-4 mb-2 block text-sm font-medium">
+                                                    City
+                                                </label>
+                                                <input type="text" id="city" v-model="form.city"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="City" />
+                                                <InputError class="mt-2" :message="form.errors.city" />
+                                            </div>
+                                            <div class="flex-auto">
+                                                <label for="state" class="mt-4 mb-2 block text-sm font-medium">
+                                                    State
+                                                </label>
+                                                <input type="text" id="state" v-model="form.state"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="State" />
+                                                <InputError class="mt-2" :message="form.errors.state" />
+                                            </div>
+                                            <div class="flex-auto">
+                                                <label for="zipcode" class="mt-4 mb-2 block text-sm font-medium">
+                                                    Zipcode
+                                                </label>
+                                                <input type="text" id="zipcode" v-model="form.zipcode"
+                                                    class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                                    placeholder="Zipcode" />
+                                                <InputError class="mt-2" :message="form.errors.zipcode" />
+                                            </div>
+                                        </div>
 
 
-                                <!-- Total -->
-                                <div class="mt-6 border-t border-b py-2">
-                                    <div class="flex items-center justify-between">
-                                        <p class="text-sm font-medium text-gray-900">Subtotal</p>
-                                        <p class="font-semibold text-gray-900">${{ total_value }}</p>
+                                        <!-- Total -->
+                                        <div class="mt-6 border-t border-b py-2">
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-sm font-medium text-gray-900">Subtotal</p>
+                                                <p class="font-semibold text-gray-900">${{ total_value }}</p>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-sm font-medium text-gray-900">Shipping</p>
+                                                <p class="font-semibold text-gray-900">$0.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-6 flex items-center justify-between">
+                                            <p class="text-sm font-medium text-gray-900">Total</p>
+                                            <p class="text-2xl font-semibold text-gray-900">${{ total_value }}</p>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <p class="text-sm font-medium text-gray-900">Shipping</p>
-                                        <p class="font-semibold text-gray-900">$8.00</p>
-                                    </div>
+                                    <button
+                                        class="mt-4 mb-8 w-full rounded-md bg-orange-500 px-6 py-3 font-medium text-white">
+                                        Place Order and Pass to Payment
+                                    </button>
                                 </div>
-                                <div class="mt-6 flex items-center justify-between">
-                                    <p class="text-sm font-medium text-gray-900">Total</p>
-                                    <p class="text-2xl font-semibold text-gray-900">$408.00</p>
-                                </div>
-                            </div>
-                            <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
-                                Place Order and Pass to Payment
-                            </button>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

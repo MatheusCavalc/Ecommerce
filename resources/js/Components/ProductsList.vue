@@ -56,13 +56,28 @@ defineProps(['products'])
                         <span
                             class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded ml-3">5.0</span>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-bold text-gray-900">${{ product.price }}</span>
-                        <Link :href="route('cart.add', [product.slug, 1])"
-                            class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        Add to cart
-                        </Link>
-                    </div>
+                    <template v-if="product.on_sale">
+                        <p class="text-dark-grayish text-base font-bold text-gray-900 w-fit line-through decoration-dark-grayish decoration-1 my-auto">
+                            ${{ product.price }}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-3xl font-bold text-gray-900">${{ product.sale_price }}</span>
+                            <Link :href="route('cart.add', [product.slug, 1])"
+                                class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Add to cart
+                            </Link>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div class="flex items-center justify-between">
+                            <span class="text-3xl font-bold text-gray-900">${{ product.price }}</span>
+                            <Link :href="route('cart.add', [product.slug, 1])"
+                                class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Add to cart
+                            </Link>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>

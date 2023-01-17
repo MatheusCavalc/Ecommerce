@@ -30,7 +30,7 @@ class HomeController extends Controller
             'categories' => Category::all(),
             'products' => Product::where('category_id', '=', $product->category_id)
                 ->where('id', '!=', $product->id)
-                ->take(4)
+                //->take(4)
                 ->get()
         ]);
     }
@@ -39,6 +39,7 @@ class HomeController extends Controller
     {
         return Inertia::render('Client/CategoryView', [
             'categories' => Category::all(),
+            'category' => $category->name,
             'products' => Product::where('category_id', '=', $category->id)->get()
         ]);
     }
