@@ -40,7 +40,7 @@ const logout = () => {
             <div class="flex flex-wrap place-items-center">
                 <section class="relative mx-auto">
                     <!-- navbar -->
-                    <nav class="flex justify-between bg-slate-400 text-black w-screen">
+                    <nav class="flex justify-between bg-white text-black w-screen">
                         <div class="px-5 xl:px-12 py-6 flex w-full items-center">
                             <Link class="text-3xl font-bold font-heading" :href="route('home')">
                                 <!-- <img class="h-9" src="logo.png" alt="logo"> -->
@@ -55,10 +55,10 @@ const logout = () => {
                                     </template>
 
                                     <template #content>
-                                        <div class="text-left text-sm my-1 w-4/5 mx-auto text-gray-200 font-bold"
+                                        <div class="text-left text-sm my-1 w-4/5 mx-auto font-bold"
                                             id="submenu" v-for="category in categories" :key="category.id">
                                             <Link :href="route('category_view', category.slug)">
-                                            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md">
+                                            <h1 class="cursor-pointer p-2 hover:bg-slate-300 rounded-md">
                                                 {{ category.name }}
                                             </h1>
                                             </Link>
@@ -154,7 +154,7 @@ const logout = () => {
             </main>
 
 
-            <footer class="p-4 bg-slate-400 sm:p-6">
+            <footer class="p-4 bg-white sm:p-6">
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
                         <a href="https://flowbite.com/" class="flex items-center">

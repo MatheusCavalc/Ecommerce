@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Tecnologia'
+            'name' => 'Mobile'
         ]);
     }
 }

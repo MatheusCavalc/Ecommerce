@@ -55,20 +55,20 @@ import { Link } from '@inertiajs/inertia-vue3';
                                 </template>
 
                                 <template #content>
-                                    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+                                    <div class="text-left text-sm mt-2 w-4/5 mx-auto font-bold"
                                         id="submenu">
                                         <Link :href="route('admin.orders.index')">
-                                        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                                        <h1 class="cursor-pointer p-2 hover:bg-blue-500 rounded-md mt-1">
                                             All Orders
                                         </h1>
                                         </Link>
                                         <Link :href="route('admin.orders.paid-orders')">
-                                        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                                        <h1 class="cursor-pointer p-2 hover:bg-blue-500 rounded-md mt-1">
                                             Paid Orders
                                         </h1>
                                         </Link>
                                         <Link :href="route('admin.orders.pending-orders')">
-                                        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                                        <h1 class="cursor-pointer p-2 hover:bg-blue-500 rounded-md mt-1">
                                             Pending Payment Orders
                                         </h1>
                                         </Link>

@@ -13,12 +13,20 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::query()
-            ->where('published', '=', 1)
+            ->where('published', '=', true)
+            ->where('on_sale', '=', false)
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+            ->get();
+
+        $sale_products = Product::query()
+            ->where('published', '=', true)
+            ->where('on_sale', '=', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return Inertia::render('Client/Index', [
-            'products' => Product::all(),
+            'products' => $products,
+            'sale_products' => $sale_products,
             'categories' => Category::all(),
         ]);
     }
@@ -29,6 +37,7 @@ class HomeController extends Controller
             'product' => $product,
             'categories' => Category::all(),
             'products' => Product::where('category_id', '=', $product->category_id)
+                ->where('published', '=', true)
                 ->where('id', '!=', $product->id)
                 //->take(4)
                 ->get()
@@ -40,7 +49,9 @@ class HomeController extends Controller
         return Inertia::render('Client/CategoryView', [
             'categories' => Category::all(),
             'category' => $category->name,
-            'products' => Product::where('category_id', '=', $category->id)->get()
+            'products' => Product::where('category_id', '=', $category->id)
+                ->where('published', '=', true)
+                ->get()
         ]);
     }
 }
