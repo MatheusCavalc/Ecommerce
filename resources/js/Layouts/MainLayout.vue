@@ -1,32 +1,17 @@
 <script setup>
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
-defineProps({
-    title: String,
-    categories: Array
-});
+defineProps(['title', 'categories']);
 
-const showingNavigationDropdown = ref(false);
+const form = useForm({
+    search: '',
+})
 
-const switchToTeam = (team) => {
-    Inertia.put(route('current-team.update'), {
-        team_id: team.id,
-    }, {
-        preserveState: false,
-    });
-};
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
+const submit = () => {
+    form.get(route('product.search'));
+}
 </script>
 
 <template>
@@ -41,11 +26,44 @@ const logout = () => {
                 <section class="relative mx-auto">
                     <!-- navbar -->
                     <nav class="flex justify-between bg-white text-black w-screen">
-                        <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+                        <div class="px-5 xl:px-12 pt-4 flex w-full items-center">
                             <Link class="text-3xl font-bold font-heading" :href="route('home')">
-                                <!-- <img class="h-9" src="logo.png" alt="logo"> -->
-                                Logo Here.
+                            <!-- <img class="h-9" src="logo.png" alt="logo"> -->
+                            Logo Here
                             </Link>
+                            <!-- Search Bar-->
+                            <div class="ml-15 w-6/12 xl:px-12">
+                                <form @submit.prevent="submit" class="flex items-center">
+                                    <div class="relative w-full">
+                                        <div
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <input type="text" v-model="form.search"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-orange-500 focus:border-orange-500 block w-full pl-10 p-2.5  "
+                                            placeholder="Search">
+                                    </div>
+                                    <button type="submit"
+                                        class="p-2.5 ml-1 text-sm font-medium text-gray-500 focus:ring-4 border-gray-300 focus:outline-none focus:ring-orange-500">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                        <span class="sr-only">Search</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                    <nav class="flex justify-between bg-white text-black w-screen">
+                        <div class="px-5 xl:px-12 py-4 flex w-full items-center">
                             <!-- Nav Links -->
                             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
 
@@ -55,8 +73,8 @@ const logout = () => {
                                     </template>
 
                                     <template #content>
-                                        <div class="text-left text-sm my-1 w-4/5 mx-auto font-bold"
-                                            id="submenu" v-for="category in categories" :key="category.id">
+                                        <div class="text-left text-sm my-1 w-4/5 mx-auto font-bold" id="submenu"
+                                            v-for="category in categories" :key="category.id">
                                             <Link :href="route('category_view', category.slug)">
                                             <h1 class="cursor-pointer p-2 hover:bg-slate-300 rounded-md">
                                                 {{ category.name }}
@@ -70,7 +88,9 @@ const logout = () => {
 
 
 
-                                <li><Link class="hover:text-gray-200" :href="route('home')">Home</Link></li>
+                                <li>
+                                    <Link class="hover:text-gray-200" :href="route('home')">Home</Link>
+                                </li>
                                 <li><a class="hover:text-gray-200" href="#">Collections</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                             </ul>
@@ -84,17 +104,17 @@ const logout = () => {
                                     </svg>
                                 </a>
                                 <Link class="flex items-center hover:text-gray-200" :href="route('cart.index')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    <span class="flex absolute -mt-5 ml-4">
-                                        <span
-                                            class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-                                        </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span class="flex absolute -mt-5 ml-4">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
                                     </span>
+                                </span>
                                 </Link>
                                 <!-- Sign In / Register -->
                                 <Link v-if="$page.props.user" :href="route('dashboard')"

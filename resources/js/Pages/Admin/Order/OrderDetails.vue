@@ -27,6 +27,7 @@ defineProps(['order'])
 
 
                         <p class="my-2"> SHIPPING ADDRESS: {{ order.state }}, {{ order.city }}, {{ order.address1 }}</p>
+                        <p class="my-2"> ZIPCODE: {{ order.zipcode }}</p>
                     </div>
 
                     <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">

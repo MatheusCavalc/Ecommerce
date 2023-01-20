@@ -55,6 +55,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{product:slug}', [HomeController::class, 'viewProduct'])->name('product.view');
 Route::get('/c/{category:slug}', [HomeController::class, 'viewCategory'])->name('category_view');
+Route::get('/search', [HomeController::class, 'search'])->name('product.search');
 
 Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function(){
     Route::get('/', [CartController::class, 'index'])->name('index');
