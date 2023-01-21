@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CheckoutController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\WishlistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -69,4 +70,10 @@ Route::prefix('/checkout')->name('checkout.')->middleware('auth')->group(functio
     Route::post('/', [CheckoutController::class, 'placeOrder'])->name('place.order');
     Route::get('/success', [CheckoutController::class, 'success'])->name('success');
     Route::get('/failure', [CheckoutController::class, 'failure'])->name('failure');
+});
+
+Route::prefix('/wishlist')->name('wishlist.')->middleware('auth')->group(function(){
+    Route::get('/', [WishlistController::class, 'index'])->name('index');
+    Route::post('/add-to-wishlist', [WishlistController::class, 'add'])->name('add');
+    Route::post('/remove-to-wishlist', [WishlistController::class, 'remove'])->name('remove');
 });

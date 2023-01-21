@@ -22,10 +22,7 @@ const increaseQty = () => {
     } else {
         qty.value++
     }
-    console.log(qty)
 }
-
-console.log(qty)
 
 const per = Math.round(100 - (props.product.sale_price * 100 / props.product.price))
 
