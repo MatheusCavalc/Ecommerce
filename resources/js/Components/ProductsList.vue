@@ -1,16 +1,19 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
 import axios from 'axios';
+import { useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 defineProps(['products'])
+
+const toast = useToast();
 
 const addToWishList = (productId, e) => {
     e.preventDefault();
     axios.post("/wishlist/add-to-wishlist", {
         product_id: productId,
     }).then((response) => {
-        //flash message
-        console.log(response.data)
+        toast(response.data['status']);
     });
 }
 

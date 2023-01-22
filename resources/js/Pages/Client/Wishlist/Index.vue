@@ -6,10 +6,13 @@ import TData from '@/Components/TData.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { ref } from 'vue';
 import axios from 'axios';
+import { useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 const props = defineProps(['categories', 'wishlist'])
 
 const wishlistProducts = ref('')
+const toast = useToast();
 
 wishlistProducts.value = props.wishlist
 
@@ -19,6 +22,7 @@ const removeToWishList = (productId, e) => {
         product_id: productId,
     }).then((response) => {
         wishlistProducts.value = response.data
+        toast("Product removed from your wishlist");
     });
 }
 </script>

@@ -2,8 +2,16 @@
 import MainLayout from '@/Layouts/MainLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { Link, useForm } from '@inertiajs/inertia-vue3';
+import { useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 defineProps(['cartBox', 'categories', 'total_value', 'total_items'])
+
+const toast = useToast();
+
+const removeFromCart = () => {
+    toast('Product removed from cart');
+}
 
 </script>
 
@@ -47,7 +55,7 @@ defineProps(['cartBox', 'categories', 'total_value', 'total_items'])
                                     <span class="text-center w-1/5 font-semibold text-sm">${{ cart.price }}</span>
                                     <span class="text-center w-1/5 font-semibold text-sm">${{ cart.total_price }}</span>
                                     <span class="text-center w-1/5 font-semibold text-sm">
-                                        <Link :href="route('cart.remove', cart.id)">
+                                        <Link preserve-scroll @click="removeFromCart" :href="route('cart.remove', cart.id)">
                                         <DangerButton>
                                             Remove
                                         </DangerButton>
