@@ -23,7 +23,7 @@ const removeFromCart = () => {
                     <div class="flex shadow-md">
                         <div class="w-3/4 bg-white px-10 py-10">
                             <div class="flex justify-between border-b pb-8">
-                                <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+                                <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">Shopping Cart</h1>
                                 <h2 class="font-semibold text-2xl">{{ total_items }} Items</h2>
                             </div>
                             <div class="flex mt-10 mb-5">

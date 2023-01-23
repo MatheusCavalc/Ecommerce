@@ -77,3 +77,8 @@ Route::prefix('/wishlist')->name('wishlist.')->middleware('auth')->group(functio
     Route::post('/add-to-wishlist', [WishlistController::class, 'add'])->name('add');
     Route::post('/remove-to-wishlist', [WishlistController::class, 'remove'])->name('remove');
 });
+
+Route::prefix('/dashboard/client')->name('dashboard.')->middleware('auth')->group(function(){
+    Route::get('', [HomeController::class, 'dashboardIndex'])->name('index');
+    Route::get('/orders/{id}/details', [HomeController::class, 'orderDetails'])->name('orders.details');
+});

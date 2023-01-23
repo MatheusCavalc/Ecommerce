@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 
 class HomeController extends Controller
@@ -70,5 +71,25 @@ class HomeController extends Controller
 
         // Return the search view with the resluts compacted
         return Inertia::render('Client/ProductSearch', compact('categories', 'search', 'products'));
+    }
+
+    public function dashboardIndex()
+    {
+        return Inertia::render('Client/Dashboard/Index', [
+            'orders' => Order::where('created_by', auth()->user()->id)->get()
+        ]);
+    }
+
+    public function orderDetails($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($order->created_by != auth()->user()->id) {
+            return abort(404);
+        }
+
+        return Inertia::render('Client/Dashboard/Order', [
+            'order' => $order
+        ]);
     }
 }
