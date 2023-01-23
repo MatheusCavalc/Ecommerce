@@ -40,7 +40,10 @@ class CartController extends Controller
             ];
 
             session()->put('cart', $cart);
-            return redirect()->route('cart.index');
+
+            $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+            return response()->json(['qty' => $total_items]);
+            //return redirect()->route('cart.index');
         }
 
         if (isset($cart)) {
@@ -53,7 +56,10 @@ class CartController extends Controller
                 'total_price' => $price * $qty
             ];
             session()->put('cart', $cart);
-            return redirect()->route('cart.index');
+
+            $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+            return response()->json(['qty' => $total_items]);
+            //return redirect()->route('cart.index');
         }
     }
 
@@ -64,6 +70,9 @@ class CartController extends Controller
         if (isset($cart[$product_id])) {
             unset($cart[$product_id]);
             session()->put('cart', $cart);
+
+
+            $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
             return redirect()->route('cart.index');
         }
     }
@@ -75,7 +84,10 @@ class CartController extends Controller
         if (isset($cart[$request->product_id])) {
             $cart[$request->product_id]['qty'] = $request->qty;
             session()->put('cart', $cart);
-            return redirect()->route('cart.index');
+
+            $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+            return response()->json(['qty' => $total_items]);
+            //return redirect()->route('cart.index');
         }
     }
 }

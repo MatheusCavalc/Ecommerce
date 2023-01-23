@@ -17,6 +17,14 @@ const addToWishList = (productId, e) => {
     });
 }
 
+const addToCart = (productSlug, qty, e) => {
+    e.preventDefault();
+    axios.get("/cart/add/" + productSlug + "/" + qty).then((response) => {
+        toast("Product add to your cart")
+        //console.log(response.data['qty'])
+    });
+}
+
 </script>
 
 <template>
@@ -85,7 +93,7 @@ const addToWishList = (productId, e) => {
                                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                             </svg>
                             </Link>
-                            <Link :href="route('cart.add', [product.slug, 1])"
+                            <Link @click="addToCart(product.slug, 1, $event)" preserve-scroll
                                 class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -107,7 +115,7 @@ const addToWishList = (productId, e) => {
                                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                             </svg>
                             </Link>
-                            <Link :href="route('cart.add', [product.slug, 1])"
+                            <Link @click="addToCart(product.slug, 1, $event)" preserve-scroll
                                 class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">

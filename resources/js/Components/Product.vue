@@ -1,9 +1,13 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
+import axios from 'axios';
+import { useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 const props = defineProps(['product'])
 
+const toast = useToast();
 let qty = ref('')
 
 qty.value = 1
@@ -22,6 +26,23 @@ const increaseQty = () => {
     } else {
         qty.value++
     }
+}
+
+const addToWishList = (productId, e) => {
+    e.preventDefault();
+    axios.post("/wishlist/add-to-wishlist", {
+        product_id: productId,
+    }).then((response) => {
+        toast(response.data['status']);
+    });
+}
+
+const addToCart = (productSlug, qty, e) => {
+    e.preventDefault();
+    axios.get("/cart/add/" + productSlug + "/" + qty).then((response) => {
+        toast("Product add to your cart")
+        //console.log(response.data['qty'])
+    });
 }
 
 const per = Math.round(100 - (props.product.sale_price * 100 / props.product.price))
@@ -133,16 +154,30 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
                         </svg>
                     </button>
                 </div>
-                <Link :href="route('cart.add', [product.slug, qty])"
-                    class="w-full h-10 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
-                    id="add-cart">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20">
-                    <path
-                        d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
-                        fill="hsl(223, 64%, 98%)" fill-rule="nonzero" />
-                </svg>
-                Add to cart
-                </Link>
+                <div class="flex items-center justify-between w-full">
+                    <Link @click="addToWishList(product.id, $event)" preserve-scroll
+                        class="w-1/2 h-10 ml-7 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
+                        id="add-cart">
+                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 20"
+                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                    </svg>
+                    Add to wishlist
+                    </Link>
+
+                    <Link @click="addToCart(product.slug, qty, $event)" preserve-scroll
+                        class="w-1/2 h-10 ml-7 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
+                        id="add-cart">
+                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+
+                    Add to cart
+                    </Link>
+                </div>
             </div>
         </section>
     </main>
