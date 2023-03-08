@@ -12,21 +12,21 @@ class OrderController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Order/Index', [
-            'orders' => Order::all(),
+            'orders' => Order::paginate(10),
         ]);
     }
 
     public function paidOrders()
     {
         return Inertia::render('Admin/Order/Index', [
-            'orders' => Order::where('status_payment', 'PAID')->get()
+            'orders' => Order::where('status_payment', 'PAID')->paginate(10)
         ]);
     }
 
     public function pendingOrders()
     {
         return Inertia::render('Admin/Order/Index', [
-            'orders' => Order::where('status_payment', 'PENDING')->get()
+            'orders' => Order::where('status_payment', 'PENDING')->paginate(10)
         ]);
     }
 

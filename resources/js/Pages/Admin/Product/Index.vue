@@ -46,7 +46,7 @@ modal()
                             <THead label="Edit" />
                         </template>
                         <template #tableRows>
-                            <tr v-for="product in products" :key="product.id"
+                            <tr v-for="product in products.data" :key="product.id"
                                 class="bg-white border-b hover:bg-gray-200">
                                 <TData type="first">
                                     {{ product.name }}

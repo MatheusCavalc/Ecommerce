@@ -86,10 +86,7 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
         </section>
 
         <!-- Product infos -->
-        <section class="w-full p-6 lg:mt-36 lg:pr-20 lg:py-10 2xl:pr-40 2xl:mt-40">
-            <h4 class="font-bold text-orange mb-2 uppercase text-xs tracking-widest">
-                Sneaker Company
-            </h4>
+        <section class="w-full p-6 lg:mt-20 lg:pr-20 lg:py-10 2xl:pr-40 2xl:mt-40">
             <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">
                 {{ product.name }}
             </h1>

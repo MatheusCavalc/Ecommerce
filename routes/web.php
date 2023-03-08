@@ -50,8 +50,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
 
 
-
-
 //     APP - CLIENT SIDE    //
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{product:slug}', [HomeController::class, 'viewProduct'])->name('product.view');

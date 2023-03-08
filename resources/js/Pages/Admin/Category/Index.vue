@@ -43,7 +43,7 @@ modal()
                             <THead label="Edit" />
                         </template>
                         <template #tableRows>
-                            <tr v-for="category in categories" :key="category.id"
+                            <tr v-for="category in categories.data" :key="category.id"
                                 class="bg-white border-b hover:bg-gray-200">
                                 <TData type="first">
                                     {{ category.name }}

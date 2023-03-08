@@ -30,7 +30,7 @@ defineProps(['orders'])
                             <THead label="Edit" />
                         </template>
                         <template #tableRows>
-                            <tr v-for="order in orders" :key="order.id" class="bg-white border-b hover:bg-gray-200">
+                            <tr v-for="order in orders.data" :key="order.id" class="bg-white border-b hover:bg-gray-200">
                                 <TData type="first">
                                     {{ order.id }}
                                 </TData>

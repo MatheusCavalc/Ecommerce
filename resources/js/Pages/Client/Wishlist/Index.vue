@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 import Table from '@/Components/Table.vue';
 import TData from '@/Components/TData.vue';
 import DangerButton from '@/Components/DangerButton.vue';
@@ -44,11 +44,15 @@ const removeToWishList = (productId, e) => {
                                     <tr v-for="wishlist in wishlistProducts" :key="wishlist.id"
                                         class="bg-white border-b hover:bg-gray-200">
                                         <TData type="first">
-                                            <img class="h-16 w-16 rounded-t-lg"
-                                                :src="`/storage/${wishlist.product.image}`" alt="product image" />
+                                            <Link :href="route('product.view', wishlist.product.slug)">
+                                            <img class="h-16 w-16 rounded-t-lg" :src="`/storage/${wishlist.product.image}`"
+                                                alt="product image" />
+                                            </Link>
                                         </TData>
                                         <TData type="first">
+                                            <Link :href="route('product.view', wishlist.product.slug)">
                                             {{ wishlist.product.name }}
+                                            </Link>
                                         </TData>
                                         <TData type="first">
                                             <p v-if="wishlist.product.on_sale == true">{{ wishlist.product.sale_price }}

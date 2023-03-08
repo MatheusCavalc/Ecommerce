@@ -39,8 +39,8 @@ const removeFromCart = () => {
                             <div v-for="cart in cartBox" :key="cart.id">
                                 <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                                     <div class="flex w-2/5"> <!-- product -->
-                                        <div class="w-20">
-                                            <img class="h-24" :src="`/storage/${cart.image}`" :alt="cart.name">
+                                        <div class="">
+                                            <img class="object-scale-down h-24 w-32" :src="`/storage/${cart.image}`" :alt="cart.name">
                                         </div>
                                         <div class="flex flex-col justify-between ml-6 my-auto flex-grow">
                                             <span class="font-bold text-sm">{{ cart.name }}</span>

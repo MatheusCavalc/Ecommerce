@@ -66,7 +66,9 @@ const submit = () => {
                         <div class="px-5 xl:px-12 py-4 flex w-full items-center">
                             <!-- Nav Links -->
                             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-
+                                <li>
+                                    <Link class="hover:text-gray-200" :href="route('home')">Home</Link>
+                                </li>
                                 <Dropdown>
                                     <template #trigger>
                                         <li><a class="hover:text-gray-200" href="#">Category</a></li>
@@ -84,12 +86,6 @@ const submit = () => {
                                     </template>
                                 </Dropdown>
 
-
-
-
-                                <li>
-                                    <Link class="hover:text-gray-200" :href="route('home')">Home</Link>
-                                </li>
                                 <li><a class="hover:text-gray-200" href="#">Collections</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                             </ul>
@@ -148,10 +144,10 @@ const submit = () => {
                                 </template>
 
                                 <template v-else>
-                                    <Link :href="route('login')" class="flex items-center hover:text-gray-200">Log in
+                                    <Link :href="route('login')" class="-mr-2 flex items-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">Log in
                                     </Link>
 
-                                    <Link :href="route('register')" class="ml-4 flex items-center hover:text-gray-200">
+                                    <Link :href="route('register')" class="flex items-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
                                     Register</Link>
                                 </template>
                             </div>
@@ -199,8 +195,7 @@ const submit = () => {
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
                         <a href="https://flowbite.com/" class="flex items-center">
-                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-                            <span class="self-center text-2xl font-semibold whitespace-nowrap ">Flowbite</span>
+                            <span class="self-center text-2xl font-semibold whitespace-nowrap ">Logo Here</span>
                         </a>
                     </div>
 
@@ -223,9 +218,7 @@ const submit = () => {
                                 <li class="mb-4">
                                     <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
                                 </li>
-                                <li>
-                                    <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
-                                </li>
+
                             </ul>
                         </div>
                         <div>
@@ -243,8 +236,7 @@ const submit = () => {
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">
-                    <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="https://flowbite.com/"
-                            class="hover:underline">Flowbite™</a>. All Rights Reserved.
+                    <span class="text-sm text-gray-500 sm:text-center">© 2023 All Rights Reserved.
                     </span>
                     <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                         <a href="#" class="text-gray-500 hover:text-gray-900">
