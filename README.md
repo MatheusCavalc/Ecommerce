@@ -13,6 +13,7 @@ composer install
 ```shell
 cp .env.example .env
 ```
+- A aplicação utiliza o Stripe como forma de pagamento, então preencha as chaves STRIPE_KEY e STRIPE_SECRET no arquivo .env
 - Gere uma chave de aplicativo Laravel usando o seguinte comando:
 ```shell
 php artisan key:generate
@@ -21,20 +22,24 @@ php artisan key:generate
 ```shell
 ./vendor/bin/sail up -d
 ```
-- Execute o comando abaixo para popular o banco de dados com as tabelas necessarias para a aplicacao:
+- Execute o comando abaixo para popular o banco de dados com as tabelas necessarias para a aplicação:
 ```shell
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan migrate --seed
 ```
 - Para instalar as dependências do NPM no projeto execute o comando:
 ```shell
 ./vendor/bin/sail npm install
 ```
-- Para compilar os arquivos da aplicacao:
+- Para compilar os arquivos da aplicação:
 ```shell
 ./vendor/bin/sail npm run dev
 ```
+- A aplicação trabalha com filas para processar compras feitas então execute o comando:
+```shell
+./vendor/bin/sail artisan queue:work
+```
 
-Depois que os comandos acima forem executados, você poderá acessar seu aplicativo Laravel em http://localhost.
+Depois que os comandos acima forem executados, você poderá acessar seu aplicativo Laravel em http://localhost. A conta admin, se executado o seed nos comandos, sera Email: admin@admin.com e Password: 12345678.
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
