@@ -8,6 +8,7 @@ use App\Jobs\StoreOrderDataJob;
 use App\Models\Category;
 use App\Models\Order;
 use App\Enums\PaymentStatus;
+use App\Enums\ShippingStatus;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Stripe\Checkout\Session;
@@ -86,7 +87,7 @@ class CheckoutController extends Controller
         //Queue + Job
         StoreOrderDataJob::withChain([
             new SendOrderDataEmailJob($session->customer_details->email, $order)
-        ])->dispatch($request->get('order_id'), PaymentStatus::Paid, $session->payment_intent, $session->customer_details->email);
+        ])->dispatch($request->get('order_id'), PaymentStatus::Paid, ShippingStatus::Pending, $session->payment_intent, $session->customer_details->email);
 
         return Inertia::render('Client/Checkout/Success', compact('categories', 'session'));
     }
@@ -95,7 +96,7 @@ class CheckoutController extends Controller
     {
         $categories = Category::all();
 
-        new StoreOrderDataJob($request->get('order_id'), PaymentStatus::Failed);
+        new StoreOrderDataJob($request->get('order_id'), PaymentStatus::Failed, ShippingStatus::Pending);
 
         //send email //queue
 

@@ -21,7 +21,12 @@ class Order extends Model
         'state',
         'zipcode',
         'status_payment',
-        'created_by'
+
+
+        'stripe_payment_id',
+        'created_by',
+        'email',
+        'status_shipping'
     ];
 
     /**

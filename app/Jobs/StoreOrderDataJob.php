@@ -22,6 +22,7 @@ class StoreOrderDataJob implements ShouldQueue
     public function __construct(
         protected String $order_id,
         protected $status_payment,
+        protected $status_shipping,
         protected $stripe_payment_id = null,
         protected $email = null
     ) {
@@ -35,10 +36,11 @@ class StoreOrderDataJob implements ShouldQueue
      */
     public function handle()
     {
-        Order::findOrFail($this->order_id)->update([  //queue?job
+        Order::where('id', $this->order_id)->update([  //queue?job
             'status_payment' => $this->status_payment,
             'stripe_payment_id' => $this->stripe_payment_id,
-            'email' => $this->email
+            'email' => $this->email,
+            'status_shipping' => $this->status_shipping
         ]);
     }
 }
