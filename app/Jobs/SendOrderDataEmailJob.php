@@ -20,10 +20,11 @@ class SendOrderDataEmailJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected String $email, protected $order)
-    {
-        //
-    }
+    public function __construct(
+        protected String $email,
+        protected $order
+    )
+    {}
 
     /**
      * Execute the job.

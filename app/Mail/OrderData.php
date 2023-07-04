@@ -18,10 +18,10 @@ class OrderData extends Mailable
      *
      * @return void
      */
-    public function __construct(protected $order)
-    {
-        //
-    }
+    public function __construct(
+        protected $order
+    )
+    {}
 
     /**
      * Get the message envelope.
