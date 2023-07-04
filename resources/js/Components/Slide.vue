@@ -3,9 +3,11 @@
 </script>
 
 <template>
-    <transition name="slide">
-        <slot />
-    </transition>
+    <div class="slide">
+        <transition name="slide">
+            <slot />
+        </transition>
+    </div>
 </template>
 
 <style>
