@@ -1,11 +1,10 @@
 <script setup>
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const currentSlide = ref(1)
 const getSlideCount = ref(null)
 const autoPlayEnabled = ref(true);
-const timeoutDuration = ref(5000);
-
+const timeoutDuration = ref(10000);
 
 const nextSlide = () => {
     if (currentSlide.value === getSlideCount.value) {
@@ -17,7 +16,7 @@ const nextSlide = () => {
 
 const prevSlide = () => {
     if (currentSlide.value === 1) {
-        currentSlide.value = 1;
+        currentSlide.value = getSlideCount.value;
         return;
     }
     currentSlide.value -= 1;
@@ -40,8 +39,6 @@ if (autoPlayEnabled.value) {
 onMounted(() => {
     getSlideCount.value = document.querySelectorAll('.slide').length;
 })
-
-
 </script>
 
 <template>
@@ -49,78 +46,21 @@ onMounted(() => {
         <slot :currentSlide="currentSlide" />
 
         <!-- Navigation -->
-        <div class="navigate">
-            <div class="toggle-page left">
-                <p @click="prevSlide" class="i">-</p>
+        <div class="pt-0 pr-4 h-full w-full absolute flex justify-center items-center">
+            <div class="flex flex-auto ml-3">
+                <p @click="prevSlide" class="cursor-pointer flex items-center justify-center rounded-full w-10 h-10 bg-violet-600 text-white">-</p>
             </div>
 
-            <div class="toggle-page right">
-                <p @click="nextSlide" class="i">+</p>
+            <div class="flex flex-1 justify-end">
+                <p @click="nextSlide" class="cursor-pointer flex items-center justify-center rounded-full w-10 h-10 bg-violet-600 text-white">+</p>
             </div>
         </div>
 
         <!-- Pagination -->
-        <div class="pagination">
+        <div class="absolute bottom-6 w-full flex gap-4 justify-center items-center">
             <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
-                :class="{ active: index + 1 === currentSlide }">
+                class="cursor-pointer w-5 h-5 rounded-2xl bg-white shadow" :class="{ 'bg-violet-600': index + 1 === currentSlide }">
             </span>
         </div>
     </div>
 </template>
-
-<style scoped>
-.navigate {
-    padding: 0 16px;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.navigate .toggle-page {
-    display: flex;
-    flex: 1;
-
-}
-
-.navigate .right {
-    justify-content: flex-end;
-}
-
-.navigate .toggle-page .i {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-color: #6347c7;
-    color: #fff;
-}
-
-.pagination {
-    position: absolute;
-    bottom: 24px;
-    width: 100%;
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-}
-
-.pagination span {
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-.pagination .active {
-    background-color: #6347c7;
-}
-</style>
