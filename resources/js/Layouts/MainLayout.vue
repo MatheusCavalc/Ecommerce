@@ -3,7 +3,7 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 
-defineProps(['title', 'categories']);
+const props = defineProps(['title', 'categories']);
 
 const form = useForm({
     search: '',
@@ -78,9 +78,9 @@ const submit = () => {
                                         <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left" id="submenu"
                                             v-for="category in categories" :key="category.id">
                                             <Link :href="route('category_view', category.slug)">
-                                            <h1 class="p-2 rounded-md cursor-pointer hover:bg-slate-300">
+                                            <p class="p-2 text-black rounded-md cursor-pointer hover:bg-slate-300">
                                                 {{ category.name }}
-                                            </h1>
+                                            </p>
                                             </Link>
                                         </div>
                                     </template>

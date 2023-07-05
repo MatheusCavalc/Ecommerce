@@ -47,6 +47,8 @@ class HomeController extends Controller
 
     public function viewCategory(Category $category)
     {
+        //dd($category);
+
         return Inertia::render('Client/CategoryView', [
             'categories' => Category::all(),
             'category' => $category->name,
@@ -65,8 +67,9 @@ class HomeController extends Controller
 
         // Search in the title and body columns from the posts table
         $products = Product::query()
+            ->where('published', true)
             ->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->Where('description', 'LIKE', "%{$search}%")
             ->get();
 
         // Return the search view with the resluts compacted
