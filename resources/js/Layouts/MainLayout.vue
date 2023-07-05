@@ -25,14 +25,14 @@ const submit = () => {
             <div class="flex flex-wrap place-items-center">
                 <section class="relative mx-auto">
                     <!-- navbar -->
-                    <nav class="flex justify-between bg-white text-black w-screen">
-                        <div class="px-5 xl:px-12 pt-4 flex w-full items-center">
+                    <nav class="flex justify-between w-screen text-white bg-black">
+                        <div class="flex items-center w-full px-5 pt-4 xl:px-12">
                             <Link class="text-3xl font-bold font-heading" :href="route('home')">
                             <!-- <img class="h-9" src="logo.png" alt="logo"> -->
                             Logo Here
                             </Link>
                             <!-- Search Bar-->
-                            <div class="ml-15 w-6/12 xl:px-12">
+                            <div class="w-6/12 ml-15 xl:px-12">
                                 <form @submit.prevent="submit" class="flex items-center">
                                     <div class="relative w-full">
                                         <div
@@ -62,10 +62,10 @@ const submit = () => {
                             </div>
                         </div>
                     </nav>
-                    <nav class="flex justify-between bg-white text-black w-screen">
-                        <div class="px-5 xl:px-12 py-4 flex w-full items-center">
+                    <nav class="flex justify-between w-screen text-white bg-black">
+                        <div class="flex items-center w-full px-5 py-4 xl:px-12">
                             <!-- Nav Links -->
-                            <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                            <ul class="hidden px-4 mx-auto space-x-12 font-semibold md:flex font-heading">
                                 <li>
                                     <Link class="hover:text-gray-200" :href="route('home')">Home</Link>
                                 </li>
@@ -75,10 +75,10 @@ const submit = () => {
                                     </template>
 
                                     <template #content>
-                                        <div class="text-left text-sm my-1 w-4/5 mx-auto font-bold" id="submenu"
+                                        <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left" id="submenu"
                                             v-for="category in categories" :key="category.id">
                                             <Link :href="route('category_view', category.slug)">
-                                            <h1 class="cursor-pointer p-2 hover:bg-slate-300 rounded-md">
+                                            <h1 class="p-2 rounded-md cursor-pointer hover:bg-slate-300">
                                                 {{ category.name }}
                                             </h1>
                                             </Link>
@@ -90,24 +90,24 @@ const submit = () => {
                                 <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                             </ul>
                             <!-- Header Icons -->
-                            <div class="hidden xl:flex space-x-5 items-center">
+                            <div class="items-center hidden space-x-5 xl:flex">
                                 <Link class="hover:text-gray-200" :href="route('wishlist.index')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                                 </Link>
                                 <Link class="flex items-center hover:text-gray-200" :href="route('cart.index')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                <span class="flex absolute -mt-5 ml-4">
+                                <span class="absolute flex ml-4 -mt-5">
                                     <span
-                                        class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+                                        class="absolute inline-flex w-3 h-3 bg-pink-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex w-3 h-3 bg-pink-500 rounded-full">
                                     </span>
                                 </span>
                                 </Link>
@@ -117,7 +117,7 @@ const submit = () => {
                                         <template #trigger>
                                             <button class="flex items-center hover:text-gray-200">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24"
+                                                    class="w-6 h-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24"
                                                     stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
@@ -127,14 +127,14 @@ const submit = () => {
                                         </template>
 
                                         <template #content>
-                                            <div class="text-left text-sm my-1 w-4/5 mx-auto font-bold" id="submenu">
+                                            <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left" id="submenu">
                                                 <Link :href="route('dashboard.index')">
-                                                <h1 class="cursor-pointer p-2 hover:bg-slate-300 rounded-md">
+                                                <h1 class="p-2 rounded-md cursor-pointer hover:bg-slate-300">
                                                     My Orders
                                                 </h1>
                                                 </Link>
                                                 <Link :href="route('logout')" method="post">
-                                                <h1 class="cursor-pointer p-2 hover:bg-slate-300 rounded-md">
+                                                <h1 class="p-2 rounded-md cursor-pointer hover:bg-slate-300">
                                                     Logout
                                                 </h1>
                                                 </Link>
@@ -144,30 +144,30 @@ const submit = () => {
                                 </template>
 
                                 <template v-else>
-                                    <Link :href="route('login')" class="-mr-2 flex items-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">Log in
+                                    <Link :href="route('login')" class="flex items-center px-4 py-2 -mr-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">Log in
                                     </Link>
 
-                                    <Link :href="route('register')" class="flex items-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <Link :href="route('register')" class="flex items-center px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
                                     Register</Link>
                                 </template>
                             </div>
                         </div>
                         <!-- Responsive navbar -->
-                        <a class="xl:hidden flex mr-6 items-center" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none"
+                        <a class="flex items-center mr-6 xl:hidden" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hover:text-gray-200" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <span class="flex absolute -mt-5 ml-4">
+                            <span class="absolute flex ml-4 -mt-5">
                                 <span
-                                    class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+                                    class="absolute inline-flex w-3 h-3 bg-pink-400 rounded-full opacity-75 animate-ping"></span>
+                                <span class="relative inline-flex w-3 h-3 bg-pink-500 rounded-full">
                                 </span>
                             </span>
                         </a>
-                        <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none"
+                        <a class="self-center mr-12 navbar-burger xl:hidden" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hover:text-gray-200" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
@@ -180,7 +180,7 @@ const submit = () => {
 
             <!-- Page Heading -->
             <header v-if="$slots.header" class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
@@ -191,7 +191,7 @@ const submit = () => {
             </main>
 
 
-            <footer class="p-4 bg-white sm:p-6">
+            <footer class="p-4 text-white bg-black sm:p-6">
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
                         <a href="https://flowbite.com/" class="flex items-center">
@@ -202,9 +202,9 @@ const submit = () => {
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <template v-if="$page.props.auth.user">
                             <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">For Employees
+                                <h2 class="mb-6 text-sm font-semibold text-white uppercase">For Employees
                                 </h2>
-                                <ul class="text-gray-600">
+                                <ul class="text-gray-400">
                                     <li class="mb-4" v-if="$page.props.auth.user.admin">
                                         <a :href="route('admin')" class="hover:underline">Admin</a>
                                     </li>
@@ -212,9 +212,9 @@ const submit = () => {
                             </div>
                         </template>
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">Follow us
+                            <h2 class="mb-6 text-sm font-semibold text-white uppercase ">Follow us
                             </h2>
-                            <ul class="text-gray-600">
+                            <ul class="text-gray-400">
                                 <li class="mb-4">
                                     <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
                                 </li>
@@ -222,8 +222,8 @@ const submit = () => {
                             </ul>
                         </div>
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
-                            <ul class="text-gray-600">
+                            <h2 class="mb-6 text-sm font-semibold text-white uppercase">Legal</h2>
+                            <ul class="text-gray-400">
                                 <li class="mb-4">
                                     <a href="#" class="hover:underline">Privacy Policy</a>
                                 </li>
