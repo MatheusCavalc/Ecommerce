@@ -12,7 +12,7 @@ const props = defineProps(['categories', 'product', 'products'])
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
                 <div class="bg-white overflow-hidden sm:rounded-lg">
-                    <Product :product="product"></Product>
+                    <Product :product="product" />
                 </div>
 
                 <div class="bg-white overflow-hidden sm:rounded-lg mt-6">

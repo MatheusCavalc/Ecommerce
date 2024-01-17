@@ -3,14 +3,14 @@ import CarouselHome from '@/Components/CarouselHome.vue';
 import Slide from '@/Components/Slide.vue'
 
 const carouselSlides = [
-    "https://files.tecnoblog.net/wp-content/uploads/2020/07/samsung-galaxy-m31.jpg",
-    "https://tecseniorcel.com.br/wp-content/uploads/2020/05/conserto-celular-samsung-em-piracicaba.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq4xytif_q7XXuMkHxW_u91JYIvdoSUtYzUg&usqp=CAU"
+    "https://assets-prd.ignimgs.com/2023/05/22/top-down-angle-1684784115328.jpg",
+    "https://i.ytimg.com/vi/gtDio-nRhX8/maxresdefault.jpg",
+    "https://reviewed-com-res.cloudinary.com/image/fetch/s--xfgCLZy1--/b_white,c_fill,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_547,q_auto,w_972/https://reviewed-production.s3.amazonaws.com/1700614668213/playstation-portal-hero.png"
 ]
 </script>
 
 <template>
-    <CarouselHome class="relative max-h-screen h-screen" v-slot="{ currentSlide }">
+    <CarouselHome class="relative h-96" v-slot="{ currentSlide }">
         <Slide v-for="(slide, index) in carouselSlides" :key="index">
             <div v-show="currentSlide == index + 1" class="absolute top-0 left-0 w-full max-h-full h-full">
                 <img class="min-w-full h-full object-cover" :src="slide" alt="">

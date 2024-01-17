@@ -53,7 +53,7 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
     <main class="w-full flex flex-col lg:flex-row">
         <!-- Product images -->
         <section
-            class="h-fit flex-col gap-8 my-8 sm:flex sm:flex-row sm:gap-4 sm:h-full sm:mt-24 sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0">
+            class="h-fit lg:w-1/2 flex-col gap-8 my-8 sm:flex sm:flex-row sm:gap-4 sm:h-full sm:mt-24 sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0">
             <picture class="relative flex items-center bg-orange sm:bg-transparent">
                 <button
                     class="bg-white w-10 h-10 flex items-center justify-center pr-1 rounded-full absolute left-6 z-10 sm:hidden"
@@ -64,7 +64,7 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
                     </svg>
                 </button>
                 <img :src="`../storage/${product.image}`" alt="sneaker"
-                    class="block sm:rounded-xl xl:w-[70%] xl:rounded-xl m-auto pointer-events-none transition duration-300 lg:w-3/4 lg:pointer-events-auto lg:cursor-pointer lg:hover:shadow-xl"
+                    class="block sm:rounded-xl h-96 object-contain p-4 xl:w-[70%] xl:rounded-xl m-auto pointer-events-none transition duration-300 lg:w-3/4 lg:pointer-events-auto lg:cursor-pointer lg:hover:shadow-xl"
                     id="hero" />
                 <button
                     class="bg-white w-10 h-10 flex items-center justify-center pl-1 rounded-full absolute right-6 z-10 sm:hidden"
@@ -86,7 +86,7 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
         </section>
 
         <!-- Product infos -->
-        <section class="w-full p-6 lg:mt-20 lg:pr-20 lg:py-10 2xl:pr-40 2xl:mt-40">
+        <section class="lg:w-1/2 p-6 lg:mt-20 lg:pr-20 lg:py-10 2xl:pr-40 2xl:mt-40">
             <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">
                 {{ product.name }}
             </h1>
@@ -121,9 +121,9 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
                 </div>
             </template>
 
-            <div class="flex flex-col gap-5 mb-16 sm:flex-row lg:mb-0">
+            <div class="mb-16 lg:mb-0">
                 <div
-                    class="w-full h-10 text-sm bg-light py-2 flex items-center justify-between rounded-lg font-bold relatives sm:w-80">
+                    class="w-full h-10 text-base bg-light py-2 flex gap-6 items-center rounded-lg font-bold">
                     <button @click="decreaseQty" id="minus" class="plus-minus">
                         <div class="w-3 h-1 bg-orange-500 absolute" id="minus"></div>
                         <svg width="12" height="4" xmlns="http://www.w3.org/2000/svg"
@@ -151,9 +151,10 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
                         </svg>
                     </button>
                 </div>
-                <div class="flex items-center justify-between w-full">
+
+                <div class="mt-7 flex gap-4 items-center justify-between w-full">
                     <Link @click="addToWishList(product.id, $event)" preserve-scroll
-                        class="w-1/2 h-10 ml-7 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
+                        class="w-1/2 h-10 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
                         id="add-cart">
                     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 20"
                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -164,7 +165,7 @@ const per = Math.round(100 - (props.product.sale_price * 100 / props.product.pri
                     </Link>
 
                     <Link @click="addToCart(product.slug, qty, $event)" preserve-scroll
-                        class="w-1/2 h-10 ml-7 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
+                        class="w-1/2 h-10 bg-orange-500 py-2 flex items-center justify-center gap-4 text-xs text-white rounded-lg font-bold text-light shadow-md shadow-orange hover:brightness-125 transition select-none"
                         id="add-cart">
                     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
