@@ -14,14 +14,14 @@ const props = defineProps(['categories', 'products', 'sale_products'])
 
             <div class="max-w-7xl mx-auto mt-8">
                 <div class="bg-white overflow-hidden sm:rounded-lg px-3">
-                    <p class="text-very-dark mb-4 font-bold text-3xl text-center lg:text-4xl ml-4 mt-6">
+                    <p class="text-very-dark mb-4 font-bold text-2xl text-center lg:text-4xl mt-6">
                         Shop all latest offers
                     </p>
                     <ProductsList :products="sale_products" />
                 </div>
 
                 <div class="bg-white overflow-hidden sm:rounded-lg mt-5 px-3">
-                    <p class="text-very-dark mb-4 font-bold text-3xl text-center lg:text-4xl ml-4 mt-6">
+                    <p class="text-very-dark mb-4 font-bold text-2xl text-center lg:text-4xl mt-6">
                         Products
                     </p>
                     <ProductsList :products="products" />

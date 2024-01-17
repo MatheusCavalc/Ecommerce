@@ -46,7 +46,7 @@ onMounted(() => {
         <slot :currentSlide="currentSlide" />
 
         <!-- Navigation -->
-        <div class="absolute flex items-center justify-center w-full h-full pt-0 pr-4">
+        <div class="absolute hidden lg:flex items-center justify-center w-full h-full pt-0 pr-4">
             <div class="flex flex-auto ml-3">
                 <p @click="prevSlide"
                     class="flex items-center justify-center w-10 h-10 text-white bg-orange-500 rounded-full cursor-pointer">
@@ -63,7 +63,7 @@ onMounted(() => {
         <!-- Pagination -->
         <div class="absolute flex items-center justify-center w-full gap-4 bottom-6">
             <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
-                class="w-5 h-2 bg-white shadow cursor-pointer rounded-full"
+                class="w-2 h-2 lg:w-5 bg-white shadow cursor-pointer rounded-full"
                 :class="{ 'bg-orange-500': index + 1 === currentSlide }">
             </span>
         </div>

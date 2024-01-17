@@ -9,14 +9,14 @@ const props = defineProps(['categories', 'product', 'products'])
 
 <template>
     <MainLayout :title="product.name" :categories="categories">
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
-                <div class="bg-white overflow-hidden sm:rounded-lg">
+        <div class="pt-4 pb-20">
+            <div class="w-full mx-auto px-2 lg:px-8">
+                <div class="bg-white overflow-hidden rounded-lg">
                     <Product :product="product" />
                 </div>
 
-                <div class="bg-white overflow-hidden sm:rounded-lg mt-6">
-                    <p class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl ml-4 mt-6">
+                <div class="bg-white overflow-hidden rounded-lg mt-6 px-3">
+                    <p class="text-very-dark mb-4 text-center font-bold text-2xl lg:text-4xl ml-4 mt-6">
                         Similar Products:
                     </p>
 

@@ -36,17 +36,17 @@ const addToCart = (productSlug, qty, e) => {
 </script>
 
 <template>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 my-4">
         <div v-for="product in products" :key="product.id">
             <div class="w-full max-w-sm bg-white rounded-lg shadow-md hover:shadow-2xl">
                 <Link :href="route('product.view', product.slug)" class="h-96">
-                <img class="object-contain h-52 lg:h-96 p-8 w-full rounded-t-lg" :src="`/storage/${product.image}`"
+                <img class="object-contain h-52 lg:h-96 p-4 w-full rounded-t-lg" :src="`/storage/${product.image}`"
                     :alt="product.name" />
                 </Link>
                 <div class="px-5 pb-5">
                     <Link :href="route('product.view', product.slug)" class="">
                     <h5
-                        class="text-base mb-4 lg:text-xl lg:max-h-20 font-semibold text-ellipsis overflow-hidden tracking-tight text-gray-900 hover:underline hover:font-bold">
+                        class="text-base mb-4 lg:text-xl h-12 lg:h-14 font-semibold text-ellipsis overflow-hidden tracking-tight text-gray-900 hover:underline hover:font-bold">
                         {{ product.name }}</h5>
                     </Link>
                     <template v-if="product.on_sale">
@@ -54,11 +54,11 @@ const addToCart = (productSlug, qty, e) => {
                             class="text-dark-grayish text-base font-bold text-gray-900 w-fit line-through decoration-dark-grayish decoration-1 my-auto">
                             ${{ product.price }}
                         </p>
-                        <div class="lg:flex lg:items-center lg:justify-between">
+                        <div class="">
                             <span class="text-2xl lg:text-3xl font-bold text-gray-900">${{ product.sale_price }}</span>
-                            <div class="flex gap-2 mt-4 lg:mt-0 justify-center">
+                            <div class="flex gap-2 mt-4 justify-center">
                                 <Link @click="addToWishList(product.id, $event)" preserve-scroll
-                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
+                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 flex justify-center px-3 py-1 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -66,7 +66,7 @@ const addToCart = (productSlug, qty, e) => {
                                 </svg>
                                 </Link>
                                 <Link @click="addToCart(product.slug, 1, $event)" preserve-scroll
-                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
+                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 flex justify-center px-3 py-1 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -78,11 +78,11 @@ const addToCart = (productSlug, qty, e) => {
                     </template>
 
                     <template v-else>
-                        <div class="lg:flex lg:items-center mt-11 lg:justify-between">
+                        <div class="mt-11">
                             <span class="text-2xl lg:text-3xl font-bold text-gray-900">${{ product.price }}</span>
-                            <div class="flex gap-2 mt-4 lg:mt-0 justify-center">
+                            <div class="flex gap-2 mt-4 justify-center">
                                 <Link @click="addToWishList(product.id, $event)" preserve-scroll
-                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
+                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 flex justify-center px-3 py-1 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -90,7 +90,7 @@ const addToCart = (productSlug, qty, e) => {
                                 </svg>
                                 </Link>
                                 <Link @click="addToCart(product.slug, 1, $event)" preserve-scroll
-                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center">
+                                    class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 flex justify-center px-3 py-1 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
