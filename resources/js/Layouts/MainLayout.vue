@@ -19,7 +19,6 @@ const submit = () => {
 
 <template>
     <div>
-
         <Head :title="title" />
 
         <div class="min-h-screen bg-gray-100">
@@ -44,7 +43,7 @@ const submit = () => {
                                         </svg>
                                     </div>
                                     <input type="text" v-model="form.search"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-orange-500 focus:border-orange-500 block w-full pl-10 p-2.5  "
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-orange-500 focus:border-orange-500 block w-full pl-10 p-2.5 rounded-lg"
                                         placeholder="Search">
                                 </div>
                                 <button type="submit"
@@ -138,12 +137,12 @@ const submit = () => {
 
                         <template v-else>
                             <Link :href="route('login')"
-                                class="flex items-center text-sm lg:text-base px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
+                                class="flex items-center text-sm lg:text-base px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-700">
                             Log in
                             </Link>
 
                             <Link :href="route('register')"
-                                class="flex items-center text-sm lg:text-base px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
+                                class="flex items-center text-sm lg:text-base px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-700">
                             Register</Link>
                         </template>
 
