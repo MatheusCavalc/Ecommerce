@@ -3,13 +3,13 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import ProductsList from '@/Components/ProductsList.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
-defineProps(['categories', 'search', 'products'])
+defineProps(['search', 'products'])
 </script>
 
 <template>
 
     <Head :title="search" />
-    <MainLayout :categories="categories">
+    <MainLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
                 <div class="bg-white overflow-hidden sm:rounded-lg mt-6">

@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class WishlistController extends Controller
 {
+    public function __construct(LayoutController $layoutController)
+    {
+        $this->middleware(function ($request, $next) use ($layoutController) {
+            $layoutController->shareCommonData();
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $categories = Category::all();

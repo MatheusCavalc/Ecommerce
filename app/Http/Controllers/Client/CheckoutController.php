@@ -16,6 +16,14 @@ use Stripe\Stripe;
 
 class CheckoutController extends Controller
 {
+    public function __construct(LayoutController $layoutController)
+    {
+        $this->middleware(function ($request, $next) use ($layoutController) {
+            $layoutController->shareCommonData();
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $cartBox = session()->get('cart');

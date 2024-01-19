@@ -20,8 +20,8 @@ const removeFromCart = () => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
                 <div class="bg-white overflow-hidden sm:rounded-lg mt-6">
-                    <div class="flex shadow-md">
-                        <div class="w-3/4 bg-white px-10 py-10">
+                    <div class="lg:flex shadow-md">
+                        <div class="lg:w-3/4 bg-white px-10 py-10">
                             <div class="flex justify-between border-b pb-8">
                                 <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">Shopping Cart</h1>
                                 <h2 class="font-semibold text-2xl">{{ total_items }} Items</h2>
@@ -77,7 +77,7 @@ const removeFromCart = () => {
                             -->
                         </div>
 
-                        <div id="summary" class="w-1/4 px-8 py-10">
+                        <div id="summary" class="lg:w-1/4 px-8 py-10">
                             <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                             <div class="flex justify-between mt-10 mb-5">
                                 <span class="font-semibold text-sm uppercase">{{ total_items }} Items</span>

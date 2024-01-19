@@ -11,6 +11,14 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
+    public function __construct(LayoutController $layoutController)
+    {
+        $this->middleware(function ($request, $next) use ($layoutController) {
+            $layoutController->shareCommonData();
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $products = Product::query()
@@ -28,7 +36,6 @@ class HomeController extends Controller
         return Inertia::render('Client/Index', [
             'products' => $products,
             'sale_products' => $sale_products,
-            'categories' => Category::all(),
         ]);
     }
 
@@ -36,7 +43,6 @@ class HomeController extends Controller
     {
         return Inertia::render('Client/ProductView', [
             'product' => $product,
-            'categories' => Category::all(),
             'products' => Product::where('category_id', '=', $product->category_id)
                 ->where('published', '=', true)
                 ->where('id', '!=', $product->id)
@@ -50,7 +56,6 @@ class HomeController extends Controller
         //dd($category);
 
         return Inertia::render('Client/CategoryView', [
-            'categories' => Category::all(),
             'category' => $category->name,
             'products' => Product::where('category_id', '=', $category->id)
                 ->where('published', '=', true)

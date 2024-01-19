@@ -1,9 +1,12 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
+import { ref } from 'vue';
 
 const props = defineProps(['title', 'categories']);
+
+const cart = ref(false)
+const menu = ref(false)
 
 const form = useForm({
     search: '',
@@ -19,13 +22,11 @@ const submit = () => {
 
         <Head :title="title" />
 
-        <Banner />
-
         <div class="min-h-screen bg-gray-100">
-            <section class="relative mx-auto">
+            <section class="lg:relative w-full fixed z-50">
                 <!-- navbar -->
-                <nav class="flex justify-between w-full text-white bg-black px-5 py-4 xl:px-16">
-                    <div class="flex gap-10 w-1/2">
+                <nav class="flex lg:fixed w-full justify-between text-white bg-black px-5 py-4 xl:px-16">
+                    <div class="flex gap-10 lg:w-1/2">
                         <Link class="text-lg lg:text-3xl font-bold font-heading" :href="route('home')">
                         <!-- <img class="h-9" src="logo.png" alt="logo"> -->
                         Logo Here
@@ -59,29 +60,54 @@ const submit = () => {
                         </div>
                     </div>
                     <!-- Header Icons -->
-                    <div class="items-center hidden space-x-3 xl:flex">
-                        <Link class="hover:text-gray-200" :href="route('wishlist.index')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                        </Link>
-                        <Link class="flex items-center hover:text-gray-200" :href="route('cart.index')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span class="absolute flex ml-4 -mt-5">
-                            <span
-                                class="absolute inline-flex w-3 h-3 bg-pink-400 rounded-full opacity-75 animate-ping"></span>
-                            <span class="relative inline-flex w-3 h-3 bg-pink-500 rounded-full">
-                            </span>
-                        </span>
-                        </Link>
-                        <!-- Sign In / Register -->
+                    <div class="items-center gap-2 lg:gap-3 flex">
                         <template v-if="$page.props.user">
+                            <Link class="hover:text-gray-200" :href="route('wishlist.index')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            </Link>
+
+                            <div class="relative">
+                                <Link :href="route('cart.index')">
+                                <button @click="cart = !cart" class="flex items-center hover:text-gray-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                </button>
+                                </Link>
+
+                                <!--
+                            <div v-show="cart" class="absolute z-40 top-8 right-2 p-2 bg-white text-black rounded-md">
+                                <div class="lg:w-[430px] mx-auto my-1 text-sm font-bold text-left" id="submenu"
+                                    v-for="cart in this.$page.props.userData.cart" :key="cart.id">
+                                    <div class="flex text-black justify-between mb-2 border-b">
+                                        <div class="">
+                                            <img class="object-scale-down h-10 w-20" :src="`/storage/${cart.image}`"
+                                                :alt="cart.name">
+                                        </div>
+                                        <p class="flex flex-col justify-between font-bold flex-grow text-sm w-20 h-14">
+                                            {{ cart.name }}
+                                        </p>
+                                        <p class="text-center font-semibold text-sm">${{ cart.total_price }}</p>
+                                    </div>
+                                </div>
+
+                                <Link :href="route('cart.index')">
+                                <span class="p-2 text-black text-right rounded-md cursor-pointer hover:bg-slate-300">
+                                    Cart
+                                </span>
+                                </Link>
+
+                            </div>
+                            -->
+                            </div>
+
+                            <!-- Sign In / Register -->
                             <Dropdown>
                                 <template #trigger>
                                     <button class="flex items-center hover:text-gray-200">
@@ -94,7 +120,7 @@ const submit = () => {
                                 </template>
 
                                 <template #content>
-                                    <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left" id="submenu">
+                                    <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left text-black" id="submenu">
                                         <Link :href="route('dashboard.index')">
                                         <h1 class="p-2 rounded-md cursor-pointer hover:bg-slate-300">
                                             My Orders
@@ -112,54 +138,42 @@ const submit = () => {
 
                         <template v-else>
                             <Link :href="route('login')"
-                                class="flex items-center px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
+                                class="flex items-center text-sm lg:text-base px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
                             Log in
                             </Link>
 
                             <Link :href="route('register')"
-                                class="flex items-center px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
+                                class="flex items-center text-sm lg:text-base px-4 py-2 font-bold text-white bg-orange-500 rounded-full hover:bg-orange-700">
                             Register</Link>
                         </template>
-                    </div>
 
-                    <div class="lg:hidden flex gap-3">
-                        <a class="flex items-center" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hover:text-gray-200" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            <span class="absolute flex ml-4 -mt-5">
-                                <span
-                                    class="absolute inline-flex w-3 h-3 bg-pink-400 rounded-full opacity-75 animate-ping"></span>
-                                <span class="relative inline-flex w-3 h-3 bg-pink-500 rounded-full">
-                                </span>
-                            </span>
-                        </a>
-                        <a class="self-center navbar-burger" href="#">
+
+                        <button @click="menu = !menu" class="lg:hidden" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hover:text-gray-200" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
-                        </a>
+                        </button>
                     </div>
                 </nav>
-                <nav class="hidden lg:flex justify-between w-screen text-white bg-black">
-                    <div class="flex justify-center w-full px-5 py-4 xl:px-12">
+                <nav :class="{ 'md:block': menu, 'hidden md:block': !menu }"
+                    class="lg:flex justify-between -mt-5 lg:mt-0 lg:pt-20 w-screen text-white bg-black z-40">
+                    <div class="lg:flex lg:justify-center w-full px-5 lg:py-4 xl:px-12">
                         <!-- Nav Links -->
-                        <ul class="hidden px-4 mx-auto space-x-12 font-semibold md:flex font-heading">
-                            <li>
+                        <ul
+                            class="flex flex-col p-4 font-medium rounded-lg text-white md:p-0 bg-black md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                            <li class="py-2 lg:py-0">
                                 <Link class="hover:text-gray-200" :href="route('home')">Home</Link>
                             </li>
                             <Dropdown>
                                 <template #trigger>
-                                    <li><a class="hover:text-gray-200" href="#">Category</a></li>
+                                    <li class="py-2 lg:py-0"><a class="hover:text-gray-200" href="#">Category</a></li>
                                 </template>
 
                                 <template #content>
                                     <div class="w-4/5 mx-auto my-1 text-sm font-bold text-left" id="submenu"
-                                        v-for="category in categories" :key="category.id">
+                                        v-for="category in this.$page.props.userData.categories" :key="category.id">
                                         <Link :href="route('category_view', category.slug)">
                                         <p class="p-2 text-black rounded-md cursor-pointer hover:bg-slate-300">
                                             {{ category.name }}
@@ -169,8 +183,8 @@ const submit = () => {
                                 </template>
                             </Dropdown>
 
-                            <li><a class="hover:text-gray-200" href="#">Collections</a></li>
-                            <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
+                            <li class="py-2 lg:py-0"><a class="hover:text-gray-200" href="#">Collections</a></li>
+                            <li class="py-2 lg:py-0"><a class="hover:text-gray-200" href="#">Contact Us</a></li>
                         </ul>
                     </div>
                     <!-- Responsive navbar -->

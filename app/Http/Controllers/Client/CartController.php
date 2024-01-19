@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class CartController extends Controller
 {
+    public function __construct(LayoutController $layoutController)
+    {
+        $this->middleware(function ($request, $next) use ($layoutController) {
+            $layoutController->shareCommonData();
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $cartBox = session()->get('cart');
@@ -21,7 +29,7 @@ class CartController extends Controller
         return Inertia::render('Client/Cart', compact('cartBox', 'categories', 'total_value', 'total_items'));
     }
 
-    public function add(Product $product, $qty)
+    public function add(Product $product, $qty, LayoutController $layoutController)
     {
         $cart = session()->get('cart');
 
@@ -42,6 +50,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
 
             $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+            //$layoutController->shareCommonData();
             return response()->json(['qty' => $total_items]);
             //return redirect()->route('cart.index');
         }
@@ -58,6 +67,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
 
             $total_items = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+            //$layoutController->shareCommonData();
             return response()->json(['qty' => $total_items]);
             //return redirect()->route('cart.index');
         }

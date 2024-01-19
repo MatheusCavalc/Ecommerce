@@ -3,12 +3,12 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import Carousel from '../../Components/Carousel.vue';
 import ProductsList from '@/Components/ProductsList.vue';
 
-const props = defineProps(['categories', 'products', 'sale_products'])
+const props = defineProps(['products', 'sale_products'])
 </script>
 
 <template>
-    <MainLayout title="Home E-commerce" :categories="categories">
-        <div class="pt-2 pb-36">
+    <MainLayout title="Home E-commerce">
+        <div class="pt-20 lg:pt-2 pb-36">
 
             <Carousel />
 

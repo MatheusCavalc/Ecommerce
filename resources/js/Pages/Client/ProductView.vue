@@ -4,11 +4,11 @@ import { Link } from '@inertiajs/inertia-vue3';
 import Product from '@/Components/Product.vue';
 import ProductsList from '@/Components/ProductsList.vue';
 
-const props = defineProps(['categories', 'product', 'products'])
+const props = defineProps(['product', 'products'])
 </script>
 
 <template>
-    <MainLayout :title="product.name" :categories="categories">
+    <MainLayout :title="product.name">
         <div class="pt-4 pb-20">
             <div class="w-full mx-auto px-2 lg:px-8">
                 <div class="bg-white overflow-hidden rounded-lg">

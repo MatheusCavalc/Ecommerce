@@ -19,7 +19,7 @@ const carouselSlides = [
 </script>
 
 <template>
-    <CarouselHome class="relative h-48 lg:h-96 mx-0.5" v-slot="{ currentSlide }">
+    <CarouselHome class="relative h-48 lg:h-96 mx-0.5 z-10" v-slot="{ currentSlide }">
         <Slide v-for="(slide, index) in carouselSlides" :key="index">
             <div v-show="currentSlide == index + 1" class="absolute top-0 left-0 w-full max-h-full h-full">
                 <img class="min-w-full h-full object-cover rounded-md" :src="slide.slide" alt="">
